@@ -8,8 +8,8 @@ function Projects({ token, user }) {
 
     async function getProjects() {
         const response = await fetch(
-            //import.meta.env.VITE_BACKEND_URL + "/api/projects/user/",
-              "http://localhost:3000/api/projects/user/",
+            import.meta.env.VITE_BACKEND_URL + "/api/projects/user/",
+            //   "http://localhost:3000/api/projects/user/",
             {
                 headers: {
                     Authorization: "Bearer " + token,
@@ -47,8 +47,8 @@ function Projects({ token, user }) {
         // console.log(import.meta.env.VITE_BACKEND_URL + "/api/books/"+editBookInfo._id)
         if (!editProjectInfo.delete) {
             const response = await fetch(
-                //import.meta.env.VITE_BACKEND_URL + "/api/projects/" + editProjectInfo._id,
-               "http://localhost:3000/api/projects/" + editProjectInfo._id,
+                import.meta.env.VITE_BACKEND_URL + "/api/projects/" + editProjectInfo._id,
+            //    "http://localhost:3000/api/projects/" + editProjectInfo._id,
                 {
                     method: "PUT",
                     headers: {
