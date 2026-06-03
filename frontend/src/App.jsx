@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Register from "./pages/register.jsx";
-import Books from "./pages/projects.jsx";
 import Login from "./pages/login.jsx";
 import Navbar from "./components/Navbar.jsx";
 
