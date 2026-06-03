@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 
 
-function Register({setToken, setUser}) {
+function Register({ setToken, setUser }) {
+  
+
   async function getData(body) {
-    const data = await fetch("http://localhost:3000/api/users/register", {
+    //const data = await fetch("http://localhost:3000/api/users/register", {
+    const data = await fetch(import.meta.env.VITE_BACKEND_URL+"/api/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -16,9 +19,13 @@ function Register({setToken, setUser}) {
     setUser(response.user)
     return response;
   }
+
+
   useEffect(() => {
     // getData();
   }, []);
+
+
   function handleSubmit(e) {
     e.preventDefault();
     console.log(e);
@@ -30,6 +37,7 @@ function Register({setToken, setUser}) {
     console.log(body)
     getData(body);
   }
+  
   return (
     <>
       <h1>Register</h1>

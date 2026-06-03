@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 
 function Login({setToken, setUser}) {
   async function getData(body) {
-    const data = await fetch("http://localhost:3000/api/users/login", {
+    //const data = await fetch("http://localhost:3000/api/users/login", {
+    const data = await fetch(import.meta.env.VITE_BACKEND_URL+"/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
