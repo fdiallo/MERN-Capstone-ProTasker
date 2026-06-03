@@ -2,11 +2,14 @@ const express = require("express")
 require("dotenv").config()
 const mongoose = require("mongoose")
 const cors = require("cors")
-require("./utils/connection.js")
+const { connectDB }  = require("./utils/connection.js")
 const userRoute = require("./routes/userRoutes.js")
+
+connectDB()
 
 const PORT = process.env.PORT || 4000
 
+connectDB()
 
 const app = express()
 
