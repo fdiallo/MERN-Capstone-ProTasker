@@ -7,7 +7,7 @@ const ProjectSchema = new mongoose.Schema({
     description: {
         type: String, required: true
     },
-    owner: {
+    user: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true
     }
 }, {

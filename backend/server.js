@@ -4,6 +4,7 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const { connectDB }  = require("./utils/connection.js")
 const userRoute = require("./routes/userRoutes.js")
+const projectRoute = require("./routes/projectRoutes.js")
 
 connectDB()
 
@@ -19,6 +20,7 @@ app.use(cors({
 }))
 
 app.use('/api/users', userRoute)
+app.use('/api/project', projectRoute)
 
 
 app.get("/", (req, res)=>{
