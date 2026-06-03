@@ -20,7 +20,7 @@ app.use(cors({
 }))
 
 app.use('/api/users', userRoute)
-app.use('/api/project', projectRoute)
+app.use('/api/projects', projectRoute)
 
 
 app.get("/", (req, res)=>{

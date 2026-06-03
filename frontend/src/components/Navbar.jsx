@@ -5,14 +5,14 @@ export default function Navbar({token, logOut}){
     if(token) 
     return(
         <nav>
-        <p>Paul's Cool Library</p>
+        <br /><p>Project Managment</p><br />
         <Logout logOut={logOut}/>
         </nav>
     )
     else
     return(
         <nav>
-        <p>Pro Task Management App</p>
+       <br /> <p>Pro Task Management App</p><br />
         <Link to="/register">Register</Link><br />
         <Link to="/login">Log In</Link>
         </nav>
