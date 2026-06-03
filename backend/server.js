@@ -1,20 +1,48 @@
-// Dependencies
 const express = require("express")
-const app = express()
 require("dotenv").config()
+const mongoose = require("mongoose")
+const cors = require("cors")
+require("./utils/connection.js")
+const userRoute = require("./routes/userRoutes.js")
+
+const PORT = process.env.PORT || 4000
 
 
-const { connectDB } = require("./utils/connection.js")
+const app = express()
 
-connectDB()
+app.use(express.json())
+app.use(cors({
+    origin: process.env.CORS_ORIGIN
+}))
 
-// Middleware
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())     // Middleware to parse JSON bodies
-
-// Routes
+app.use('/api/users', userRoute)
 
 
-// Port
-const PORT = process.env.PORT
-app.listen(PORT, () => { console.log(`Server listening on Port: ${PORT}`) })
+app.get("/", (req, res)=>{
+    res.send("Uder Log In Page")
+})
+
+app.listen(PORT, ()=>{
+    console.log("Listening at http://localhost:"+PORT)
+})
+
+// // Dependencies
+// const express = require("express")
+// const app = express()
+// require("dotenv").config()
+
+
+// const { connectDB } = require("./utils/connection.js")
+
+// connectDB()
+
+// // Middleware
+// app.use(express.urlencoded({ extended: true }))
+// app.use(express.json())     // Middleware to parse JSON bodies
+
+// // Routes
+
+
+// // Port
+// const PORT = process.env.PORT
+// app.listen(PORT, () => { console.log(`Server listening on Port: ${PORT}`) })
