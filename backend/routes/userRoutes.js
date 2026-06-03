@@ -77,6 +77,8 @@ router.post('/login', async (req, res) => {
     }
 })
 
+// verify our logged in user's token
+router.use(authMiddleware)
 
 // after verification send back the user details (payload)
 router.get('/', (req, res) => {
