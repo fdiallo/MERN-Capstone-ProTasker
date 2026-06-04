@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 
 function Login({ setLogin }) {
   
@@ -29,8 +30,9 @@ function Login({ setLogin }) {
   }
 
   return (
-    <>
-      <h1>Login</h1>
+     <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px', border: '1px solid #ccc' }}>
+      <h2>Log In</h2>
+      
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username: <input name="username" /><br />
         </label>
@@ -39,7 +41,8 @@ function Login({ setLogin }) {
         </label>
         <input type="submit" value="Login" />
       </form>
-    </>
+       <p>Need an account? <Link to="/register">Register here</Link></p>
+    </div>
   );
 }
 

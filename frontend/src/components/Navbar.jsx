@@ -14,7 +14,7 @@ export default function Navbar({token, logOut}){
         <nav>
        <br /> <p>Pro Task Management App</p><br />
         <Link to="/register">Register</Link><br />
-        <Link to="/login">Log In</Link>
+        <p>Already have an account? <Link to="/login">Log In</Link></p>
         </nav>
     )
 }

@@ -16,7 +16,7 @@ export default function AddProject({ addProject }) {
         <input name="name"></input><br />
         <label htmlFor="description">Description: </label>
         <input name="description"></input><br /><br />
-        <input type="submit" />
+        <button type="submit">Add New Project</button>
       </form>
     )
 }

@@ -1,5 +1,4 @@
 
-
 export default function Project({ project, checkProject }) {
     function handleCheck({target}){
         checkProject(project)

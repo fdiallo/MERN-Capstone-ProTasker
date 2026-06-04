@@ -2,6 +2,9 @@ import Project from "../components/Project.jsx";
 import AddProject from "../components/AddProject.jsx";
 import { useEffect, useState } from "react";
 
+
+import { Link } from 'react-router-dom';
+
 function Projects({ token, user }) {
 
     const [projects, setProjects] = useState([]);
@@ -48,7 +51,7 @@ function Projects({ token, user }) {
         if (!editProjectInfo.delete) {
             const response = await fetch(
                 import.meta.env.VITE_BACKEND_URL + "/api/projects/" + editProjectInfo._id,
-            //    "http://localhost:3000/api/projects/" + editProjectInfo._id,
+                //    "http://localhost:3000/api/projects/" + editProjectInfo._id,
                 {
                     method: "PUT",
                     headers: {
@@ -83,15 +86,29 @@ function Projects({ token, user }) {
     useEffect(() => {
         getProjects();
     }, []);
-    
+
     return (
         <>
             <h1>Projects</h1>
 
             {projects.map((project) => (
-                <Project key={project._id} project={project} checkProject={handleEdit} />
+                <div key={project._id} style={{
+                    border: 'none',
+                    borderTop: '4px dotted #ccc', // Adjust color and thickness here
+                    width: '100%',
+                    margin: '20px 0',
+                }}
+                >
+                    <br /><br />
+                    <Project key={project._id} project={project} checkProject={handleEdit} />
+
+                    <Link to={`/projects/${project._id}`}>View Details & Tasks</Link>
+
+                </div>
             ))}
 
+
+            <br /><hr style={{ borderTop: "2px solid #ccc", margin: "20px 0" }} />
             <AddProject addProject={handleProject} />
         </>
     );

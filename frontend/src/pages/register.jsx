@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { Link } from 'react-router-dom';
+
 
 function Register({setLogin}) {
   const [available, setAvailable] = useState(true)
@@ -30,7 +32,9 @@ function Register({setLogin}) {
     getData(body, e.target);
   }
   return (
-    <>
+    
+      <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px', border: '1px solid #ccc' }}>
+      <h2>Create Account</h2>
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username: </label>
@@ -41,8 +45,9 @@ function Register({setLogin}) {
         <input name="password"></input><br /><br />
         <input type="submit" value="Register" />
       </form>
+      <p>Already have an account? <Link to="/login">Login here</Link></p>
       {!available && <h3>That Username / email is not available! Did you forget your information?</h3>}
-    </>
+     </div>
   );
 }
 
