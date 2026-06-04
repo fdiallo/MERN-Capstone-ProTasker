@@ -37,7 +37,7 @@ route.get('/:projectId/tasks', async (req, res) => {
   }
 });
 
-route.put('/:projectId/tasks/:taskId', protect, async (req, res) => {
+route.put('/:projectId/tasks/:taskId', async (req, res) => {
   try {
     const project = await Project.findOne({ _id: req.params.projectId, user: req.user.id });
     if (!project) return res.status(404).json({ message: 'Project not found or unauthorized' });
@@ -55,7 +55,7 @@ route.put('/:projectId/tasks/:taskId', protect, async (req, res) => {
 });
 
 
-route.delete('/:projectId/tasks/:taskId', protect, async (req, res) => {
+route.delete('/:projectId/tasks/:taskId', async (req, res) => {
   try {
     const project = await Project.findOne({ _id: req.params.projectId, user: req.user.id });
     if (!project) return res.status(404).json({ message: 'Project not found or unauthorized' });
