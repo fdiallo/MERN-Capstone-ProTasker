@@ -45,7 +45,7 @@ function Register({setLogin}) {
         <input name="password"></input><br /><br />
         <input type="submit" value="Register" />
       </form>
-      <p>Already have an account? <Link to="/login">Login here</Link></p>
+      <br /><p>Already have an account? <Link to="/login">Login here</Link></p>
       {!available && <h3>That Username / email is not available! Did you forget your information?</h3>}
      </div>
   );

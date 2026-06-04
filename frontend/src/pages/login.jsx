@@ -39,9 +39,9 @@ function Login({ setLogin }) {
         <label htmlFor="password">Password: 
         <input name="password" /><br /><br />
         </label>
-        <input type="submit" value="Login" />
+        <input type="submit" value="Login" /><br />
       </form>
-       <p>Need an account? <Link to="/register">Register here</Link></p>
+       <br /><p>Need an account? <Link to="/register">Register here</Link></p>
     </div>
   );
 }

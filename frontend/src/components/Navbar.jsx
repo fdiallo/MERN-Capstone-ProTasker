@@ -12,9 +12,7 @@ export default function Navbar({token, logOut}){
     else
     return(
         <nav>
-       <br /> <p>Pro Task Management App</p><br />
-        <Link to="/register">Register</Link><br />
-        <p>Already have an account? <Link to="/login">Log In</Link></p>
+       <br /> <h2>Pro Task Management App</h2>
         </nav>
     )
 }
