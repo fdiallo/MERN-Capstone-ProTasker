@@ -11,14 +11,8 @@ route.use(authMiddleware)
 
 route.get("/user/", async (req, res) => {
     try {
-        const allProjects = await Project.find(
-            {
-                user: req.user._id
-            }
-        );
-        res.json({
-            projects: allProjects
-        });
+        const allProjects = await Project.find({ user: req.user._id });
+        res.json({ projects: allProjects });
     } catch (error) {
         console.error(error)
         res.status(500).send(error)
@@ -29,9 +23,7 @@ route.get("/user/", async (req, res) => {
 route.delete("/:id", async (req, res) => {
     try {
         const deleted = await Project.findByIdAndDelete(req.params.id);
-        res.json({
-            project: deleted
-        })
+        res.json({project: deleted})
     } catch (error) {
         console.error(error)
         res.status(500).send("There was an issue Deleting the project...")
@@ -70,9 +62,7 @@ route.post('/', (req, res) => {
 route.get("/:id", async (req, res) => {
     try {
         const foundProject = await Project.findById(req.params.id)
-        res.json({
-            book: foundProject
-        });
+        res.json({project: foundProject});
     } catch (error) {
         res.status(500).send("Unable to retrieved this project")
     }
