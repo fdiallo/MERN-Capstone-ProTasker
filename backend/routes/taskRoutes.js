@@ -12,17 +12,22 @@ route.use(authMiddleware)
 
 //app.post('/api/projects/:projectId/tasks', protect, async (req, res) => {
 route.post('/:projectId/tasks', async (req, res) => {
-    console.log("Creating Task with Post request...")
+    
     try {
         console.log("Creating Task with Post request...")
-        const project = await Project.findOne({ _id: req.params.projectId, owner: req.user.id });
+        const project = await Project.findOne({ _id: req.params.projectId });
         //const project = await Project.findOne({ _id: req.params.projectId});
+        //console.log("Task creation in progress...")
         if (!project) return res.status(404).json({ message: 'Project not found or unauthorized' });
-
+        console.log("Task creation in progress for: ", project._id)
         const { title, description, status } = req.body;
+
+        console.log(`Title: ${title} description: ${description} status: ${status}`)
         //const task = await Task.create({ title, description, status, project: req.params.projectId });
         const task = await Task.create({ title, description, status, project: req.params.projectId });
+        console.log("Task created successfully ...", task)
         return res.status(201).json(task);
+        
     } catch (err) {
         return res.status(500).json({ error: err.message });
     }
@@ -43,6 +48,7 @@ route.get('/:projectId/tasks', async (req, res) => {
         if (!project) return res.status(404).json({ message: 'Project not found or unauthorized' });
 
         const tasks = await Task.find({ project: req.params.projectId });
+        console.log("Listing Tasks Data: ", tasks)
         return res.json(tasks);
     } catch (err) {
         return res.status(500).json({ error: err.message });

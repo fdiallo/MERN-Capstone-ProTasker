@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export default function ProjectDetail({ token, user }) {
     const { id } = useParams();
-    console.log("Project ID: ", id)
+    //console.log("Project ID: ", id)
     const navigate = useNavigate();
     const [project, setProject] = useState(null);
     const [tasks, setTasks] = useState([]);
@@ -33,6 +33,19 @@ export default function ProjectDetail({ token, user }) {
     }
 
 
+    async function getTasks() {
+        const response = await fetch(
+            import.meta.env.VITE_BACKEND_URL + `/api/projects/${id}/tasks`,
+            {
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            },
+        );
+        const tasksData = await response.json();
+        setTasks(tasksData.tasks);
+    }
+
     const fetchProjectData = useCallback(async () => {
         //async function fetchProjectData() {
         try {
@@ -45,7 +58,7 @@ export default function ProjectDetail({ token, user }) {
             // setTasks(tRes.data);
 
 
-            console.log("Fetching Project Datail: ")
+            //console.log("Fetching Project Datail: ")
             const projectResponse = await fetch(import.meta.env.VITE_BACKEND_URL + `/api/projects/${id}`,
                 { headers: { Authorization: "Bearer " + token, }, },
             );
@@ -60,15 +73,15 @@ export default function ProjectDetail({ token, user }) {
 
             // const taskResponse = await fetch(import.meta.env.VITE_BACKEND_URL + `/api/projects/${id}/tasks`
             //     ,
-            //     { headers: {
-            //          Authorization: "Bearer " + token, 
-             //           "Content-Type": "application/json", 
-            //  }, },
+            //     {
+            //         headers: {
+            //             Authorization: "Bearer " + token,
+            //         },
+            //     },
             // );
-
             // const taskData = await taskResponse.json();
+            // console.log("Task Data: ", taskData.tasks)
             // setTasks(taskData.tasks);
-
             // console.log("Tasks List: ", taskData.tasks)
 
 
@@ -82,7 +95,10 @@ export default function ProjectDetail({ token, user }) {
     }, [id]);
 
 
-    useEffect(() => { fetchProjectData(); }, [fetchProjectData]);
+    useEffect(() => {
+        fetchProjectData();
+        getTasks()
+    }, [fetchProjectData]);
     // useEffect(() => {
     //     fetchProjectData();
     // }, []);
@@ -144,16 +160,10 @@ export default function ProjectDetail({ token, user }) {
         //     title: taskTitle, description: taskDesc, status: taskStatus
         // });
 
-
-
-
-
-        
-
         const response = await fetch(import.meta.env.VITE_BACKEND_URL + `/api/projects/${id}/tasks`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Authorization": "Bearer " + token,
             },
             body: JSON.stringify({ title: taskTitle, description: taskDesc, status: taskStatus }),
@@ -166,7 +176,7 @@ export default function ProjectDetail({ token, user }) {
         setTaskTitle('');
         setTaskDesc('');
         setTaskStatus('To Do');
-        fetchProjectData();
+        //fetchProjectData();
     };
 
 
@@ -224,7 +234,7 @@ export default function ProjectDetail({ token, user }) {
 
 
             <div>
-                <h3>Tasks Blueprint Execution Window</h3>
+                <h3>Tasks Management</h3>
                 <form onSubmit={handleCreateTask} style={{ background: '#eee', padding: '10px', marginBottom: '15px' }}>
                     <h4>Add New Task</h4>
                     <input placeholder="Task Title" value={taskTitle} onChange={e => setTaskTitle(e.target.value)} required />
@@ -238,7 +248,7 @@ export default function ProjectDetail({ token, user }) {
                 </form>
 
                 <h4>Task List</h4>
-                {tasks.map(t => (
+                {tasks?.map(t => (
                     <div key={t._id} style={{ border: '1px solid #ddd', padding: '10px', margin: '5px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div>
                             <strong>{t.title}</strong> - {t.description} <em>({t.status})</em>
