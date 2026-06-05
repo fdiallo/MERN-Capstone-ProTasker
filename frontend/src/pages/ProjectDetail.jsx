@@ -70,19 +70,17 @@ export default function ProjectDetail({ token, user }) {
             // console.log("Fetching Project Datail: ", projectData.project.description)
 
             // console.log("Project Datail: ", data.project)
+            console.log("URL PATH: ", import.meta.env.VITE_BACKEND_URL + `/api/projects/${id}/tasks`)
+            const taskResponse = await fetch(import.meta.env.VITE_BACKEND_URL + `/api/projects/${id}/tasks`,
+                { headers: { Authorization: "Bearer " + token, }, },
+            );
+           // console.log("Task Data: ", taskResponse)
+            const taskData = await taskResponse.json();
 
-            // const taskResponse = await fetch(import.meta.env.VITE_BACKEND_URL + `/api/projects/${id}/tasks`
-            //     ,
-            //     {
-            //         headers: {
-            //             Authorization: "Bearer " + token,
-            //         },
-            //     },
-            // );
-            // const taskData = await taskResponse.json();
-            // console.log("Task Data: ", taskData.tasks)
-            // setTasks(taskData.tasks);
-            // console.log("Tasks List: ", taskData.tasks)
+            console.log("Task Data: ", taskData)
+
+            setTasks(taskData);
+            console.log("Tasks List: ", taskData.tasks)
 
 
 
@@ -97,7 +95,7 @@ export default function ProjectDetail({ token, user }) {
 
     useEffect(() => {
         fetchProjectData();
-        getTasks()
+        //getTasks()
     }, [fetchProjectData]);
     // useEffect(() => {
     //     fetchProjectData();
