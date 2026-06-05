@@ -57,7 +57,8 @@ route.get('/:projectId/tasks', async (req, res) => {
 
 route.put('/:projectId/tasks/:taskId', async (req, res) => {
     try {
-        const project = await Project.findOne({ _id: req.params.projectId, user: req.user.id });
+        //const project = await Project.findOne({ _id: req.params.projectId, user: req.user.id });
+        const project = await Project.findOne({ _id: req.params.projectId });
         if (!project) return res.status(404).json({ message: 'Project not found or unauthorized' });
 
         const { title, description, status } = req.body;

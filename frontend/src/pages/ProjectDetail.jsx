@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
 
 export default function ProjectDetail({ token, user }) {
     const { id } = useParams();
@@ -184,6 +184,8 @@ export default function ProjectDetail({ token, user }) {
         //     ...currentTask, status: newStatus
         // });
 
+        console.log("Destructuring Task: ", ...currentTask)
+
         const response = await fetch(import.meta.env.VITE_BACKEND_URL + `/api/projects/${id}/tasks/${taskId}`,
             {
                 method: "PUT",
@@ -191,6 +193,10 @@ export default function ProjectDetail({ token, user }) {
                 body: JSON.stringify({ ...currentTask, status: newStatus }),
             },
         );
+
+        const newTask = await response.json()
+
+        console.log("Updating Task : ", newTask)
 
         fetchProjectData();
     };
