@@ -174,7 +174,7 @@ export default function ProjectDetail({ token, user }) {
         setTaskTitle('');
         setTaskDesc('');
         setTaskStatus('To Do');
-        //fetchProjectData();
+        fetchProjectData();
     };
 
 
@@ -201,12 +201,9 @@ export default function ProjectDetail({ token, user }) {
         //await axios.delete(`http://localhost:5000/api/projects/${id}/tasks/${taskId}`);
 
         const response = await fetch(import.meta.env.VITE_BACKEND_URL + `/api/projects/${id}/tasks/${taskId}`,
-            {
-                method: "DELETE",
-                headers: { Authorization: "Bearer " + token, },
-
-            },
+            { method: "DELETE", headers: { Authorization: "Bearer " + token, }, },
         );
+        
 
         fetchProjectData();
     };
