@@ -75,7 +75,8 @@ route.put('/:projectId/tasks/:taskId', async (req, res) => {
 
 route.delete('/:projectId/tasks/:taskId', async (req, res) => {
     try {
-        const project = await Project.findOne({ _id: req.params.projectId, user: req.user.id });
+        //const project = await Project.findOne({ _id: req.params.projectId, user: req.user.id });
+        const project = await Project.findOne({ _id: req.params.projectId });
         if (!project) return res.status(404).json({ message: 'Project not found or unauthorized' });
 
         await Task.findOneAndDelete({ _id: req.params.taskId, project: req.params.projectId });

@@ -203,7 +203,9 @@ export default function ProjectDetail({ token, user }) {
         const response = await fetch(import.meta.env.VITE_BACKEND_URL + `/api/projects/${id}/tasks/${taskId}`,
             { method: "DELETE", headers: { Authorization: "Bearer " + token, }, },
         );
-        
+
+        console.log("Deleting Task: ", response)
+
 
         fetchProjectData();
     };
