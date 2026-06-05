@@ -5,10 +5,13 @@ import Projects from "./pages/projects.jsx";
 import Login from "./pages/login.jsx";
 import Navbar from "./components/Navbar.jsx";
 
+import ProjectDetail from "./pages/ProjectDetail.jsx";
+
 
 function App() {
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     async function checkToken() {
@@ -23,10 +26,32 @@ function App() {
           },
         );
         const valid = await userResp.json()
-        if(valid._id){
-          setToken(localToken);
-          setUser(valid)
-        }
+        // if(valid._id){
+        //   setToken(localToken);
+        //   setUser(valid)
+        // }
+
+        if(!valid._id) throw new Error('Failed to fetch user')
+        setToken(localToken);
+        setUser(valid)
+
+        // const projectsResponse = await fetch(`https://example.com{user.id}`);
+        // if (!postsResponse.ok) throw new Error('Failed to fetch posts');
+        // const userPosts = await postsResponse.json();
+        // setPosts(userPosts); // Updates second state
+
+
+        //  const projectsResponse = await fetch(
+        //    import.meta.env.VITE_BACKEND_URL + `/api/projects/${valid._id}` ,
+        //     {
+        //         headers: {
+        //             Authorization: "Bearer " + token,
+        //         },
+        //     },
+        // );
+        // const data = await projectsResponse.json();
+        // setProjects(data.projects);
+        
       }
     }
     try{
@@ -52,6 +77,7 @@ function App() {
       {token ? (
         <Routes>
           <Route path="*" element={<Projects token={token} user={user} />} />
+          <Route path="/projects/:id" element={<ProjectDetail token={token} user={user} />} />
         </Routes>
       ) : (
         <Routes>

@@ -22,6 +22,7 @@ function Register({setLogin}) {
     }
     setLogin(response.token, response.user)
   }
+  
   function handleSubmit(e) {
     e.preventDefault();
     const body = {
